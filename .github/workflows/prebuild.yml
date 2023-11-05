@@ -68,8 +68,8 @@ jobs:
         id: build-and-push
         uses: devcontainers/ci@v0.3
         with:
-          imageName: ghcr.io/maazghani/dotfiles
-          cacheFrom: ghcr.io/maazghani/dotfiles
+          imageName: ghcr.io/bayt-al-hiqma/dev
+          cacheFrom: ghcr.io/bayt-al-hiqma/dev
           push: always
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
