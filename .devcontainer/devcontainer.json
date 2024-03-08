@@ -1,0 +1,32 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/debian
+{
+	"name": "Debian",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"dockerFile": "Dockerfile",
+	"features": {
+		"ghcr.io/devcontainers/features/aws-cli:1": {
+			"version": "latest"
+		},
+		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+			"version": "latest",
+			"helm": "latest",
+			"minikube": "latest"
+		},
+		"ghcr.io/devcontainers/features/terraform:1": {
+			"version": "latest",
+			"tflint": "latest",
+			"terragrunt": "latest"
+		},
+		"ghcr.io/rio/features/k9s:1": {},
+		"ghcr.io/casl0/devcontainer-features/eksctl:1": {},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+			"moby": true,
+			"azureDnsAutoDetection": true,
+			"installDockerBuildx": true,
+			"installDockerComposeSwitch": true,
+			"version": "latest",
+			"dockerDashComposeVersion": "latest"
+		}
+	}
+}
