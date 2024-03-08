@@ -1,0 +1,9 @@
+#!/bin/bash
+
+docker build --build-arg USERNAME=$USER -t ek8s-tools:latest .
+docker run --init --privileged \
+	-v /var/run/docker.sock:/var/run/docker.sock \
+       	-v $HOME/.aws:/home/$USER/.aws \
+       	-v $HOME/jira:/home/$USER/jira \
+	-v $HOME/.kube:/home/$USER/.kube \
+	-it ek8s-tools:latest

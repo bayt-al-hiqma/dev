@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# Check if an argument is provided
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <cluster-name>"
+    exit 1
+fi
+
+# Define the profile variables
+SBX_PROFILE="lll.kubernetes-digital.nonprod"
+NPD_PROFILE="lll.ent-kubernetes-plt.nonprod"
+PRD_PROFILE="lll.ent-kubernetes-plt.prod"
+
+# Extract the environment and region from the cluster name
+CLUSTER_NAME=$1
+ENV=$(echo $CLUSTER_NAME | cut -d '-' -f 2)
+REGION_CODE=$(echo $CLUSTER_NAME | cut -d '-' -f 3)
+
+# Set the appropriate AWS region based on the region code
+case $REGION_CODE in
+    east)
+        REGION="us-east-1"
+        ;;
+    west)
+        REGION="us-west-2"
+        ;;
+    prd)
+        PROFILE=$PRD_PROFILE
+        ;;
+    npd)
+        PROFILE=$NPD_PROFILE
+        ;;
+    *)
+        echo "Invalid region code: $REGION_CODE"
+        exit 1
+        ;;
+esac
+
+# Set the appropriate AWS profile based on the environment
+case $ENV in
+    sbx)
+        PROFILE=$SBX_PROFILE
+        ;;
+    east)
+        REGION="us-east-1"
+        ;;
+    west)
+        REGION="us-west-2"
+        ;;
+    npd)
+        PROFILE=$NPD_PROFILE
+        ;;
+    prd)
+        PROFILE=$PRD_PROFILE
+        ;;
+    *)
+        echo "Invalid environment: $ENV"
+        exit 1
+        ;;
+esac
+
+# Update kubeconfig with the specified cluster
+aws --region $REGION --profile $PROFILE eks update-kubeconfig --name $CLUSTER_NAME
+
