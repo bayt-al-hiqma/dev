@@ -27,6 +27,7 @@
 			"installDockerComposeSwitch": true,
 			"version": "latest",
 			"dockerDashComposeVersion": "latest"
-		}
+		},
+		"ghcr.io/rio/features/k3d:1": {}
 	}
 }
