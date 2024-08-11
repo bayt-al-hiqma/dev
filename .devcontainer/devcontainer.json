@@ -28,6 +28,7 @@
 			"version": "latest",
 			"dockerDashComposeVersion": "latest"
 		},
-		"ghcr.io/rio/features/k3d:1": {}
+		"ghcr.io/rio/features/k3d:1": {},
+		"ghcr.io/devcontainers/features/sshd:1": {}
 	}
 }
