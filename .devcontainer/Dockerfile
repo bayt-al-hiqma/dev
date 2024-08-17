@@ -1,16 +1,12 @@
 FROM debian:stable
 
-ENV USERNAME=vscode
-ENV USER_UID=1000
-ENV USER_GID=$USER_UID
-
-RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
+RUN groupadd --gid 1000 vscode \
+    && useradd -s /bin/bash --uid 1000 --gid 1000 -m vscode \
     && apt-get update \
     && apt-get install -y sudo python3 python3-pip vim zsh golang lsof ncat wget git unzip curl docker.io openssl \
-    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
-    && chmod 0440 /etc/sudoers.d/$USERNAME \
-    && usermod -aG docker $USERNAME \
+    && echo vscode ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/vscode \
+    && chmod 0440 /etc/sudoers.d/vscode \
+    && usermod -aG docker vscode \
     #
     # Clean up
     && apt-get autoremove -y \
@@ -22,9 +18,9 @@ USER vscode
 COPY aliases /tmp/aliases
 RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 
-COPY p10k.zsh /home/$USERNAME/.p10k.zsh
-COPY zshrc /home/$USERNAME/.zshrc
-WORKDIR /home/$USERNAME
+COPY p10k.zsh /home/vscode/.p10k.zsh
+COPY zshrc /home/vscode/.zshrc
+WORKDIR /home/vscode
 
 ENTRYPOINT [ "/bin/zsh" ]
 CMD ["-l"]
