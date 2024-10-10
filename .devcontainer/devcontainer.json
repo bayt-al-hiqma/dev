@@ -29,6 +29,8 @@
 			"dockerDashComposeVersion": "latest"
 		},
 		"ghcr.io/rio/features/k3d:1": {},
-		"ghcr.io/devcontainers/features/sshd:1": {}
-	}
+		"ghcr.io/devcontainers/features/sshd:1": {},
+		"ghcr.io/tailscale/codespace/tailscale": {}
+	},
+	"runArgs": ["--device=/dev/net/tun"]
 }
